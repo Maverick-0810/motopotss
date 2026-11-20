@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Outfit:wght@700;800&display=swap');
+@import "tailwindcss";
+@import "./utils/swal.css";
+@tailwind utilities;
+@source "./App.jsx";
+@source "./components";
+
+@font-face {
+  font-family: 'FoodBrand';
+  src: url('/fonts/FoodBrandDemoRegular-aY7Xo.otf') format('opentype');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'FoodBrand', system-ui, sans-serif;
+  --font-heading: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+@layer base {
+  body { @apply font-sans font-normal; }
+  h1 { @apply font-display font-extrabold; }
+  h2, h3, h4, h5, h6 { @apply font-heading font-bold; }
+  button, [role='button'] { @apply font-sans font-bold; }
+  nav a, nav button, aside a, aside button { @apply font-sans font-semibold; }
+  label { @apply font-sans font-semibold; }
+  input, textarea, select { @apply font-sans font-normal; }
+}
+
+:root {
+  --sidebar-width: 248px;
+  --color-primary-bg: #0B0B0F;
+  --color-secondary-bg: #15151C;
+  --color-tertiary-bg: #22222B;
+  --color-accent: #E63946;
+  --color-accent-hover: #C92D3A;
+  --color-primary-text: #F5F5F5;
+  --color-secondary-text: #A1A1AA;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --scrollbar-track: rgba(21, 21, 28, 0.72);
+  --scrollbar-thumb: #F5F5F5;
+  --scrollbar-thumb-hover: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+}
+
+/* A shared, understated scrollbar for the page and every nested scroll region. */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  min-height: 36px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #D4D4D8 100%);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F5F5 100%);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--color-primary-text);
+  background-color: var(--color-primary-bg);
+  background-image:
+    radial-gradient(ellipse 55% 38% at 8% 4%, rgba(230, 57, 70, 0.16), transparent 72%),
+    radial-gradient(ellipse 48% 36% at 92% 31%, rgba(112, 15, 22, 0.24), transparent 74%),
+    radial-gradient(ellipse 58% 42% at 22% 68%, rgba(201, 45, 58, 0.12), transparent 76%),
+    radial-gradient(ellipse 52% 38% at 86% 94%, rgba(230, 57, 70, 0.14), transparent 74%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.auth-modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.20);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.admin-main-content {
+  height: 100vh;
+  margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.admin-route-content {
+  animation: admin-route-enter 160ms ease-out;
+}
+
+@keyframes admin-route-enter {
+  from { opacity: 0.88; }
+  to { opacity: 1; }
+}
+
+@media (min-width: 1024px) {
+  .admin-main-content {
+    margin-left: var(--sidebar-width);
+  }
+}
+
+.mp-skeleton {
+  display: block;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.065) 0%, rgba(255, 255, 255, 0.13) 45%, rgba(255, 255, 255, 0.065) 100%);
+  background-size: 220% 100%;
+  animation: mp-skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes mp-skeleton-shimmer { 0% { background-position: 120% 0; } 100% { background-position: -120% 0; } }
+
+@media (prefers-reduced-motion: reduce) { .mp-skeleton { animation: none; } }
